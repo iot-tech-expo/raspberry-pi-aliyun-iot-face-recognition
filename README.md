@@ -281,7 +281,171 @@ module.exports = {
     tableName: 'ots结果存储表',
 }
 ```
+## 6. Web端App开发
+```html
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta charset="UTF-8">
+    <title>阿里云IoT</title>
+    <style type="text/css">
+    body {
+        line-height: 1.6;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url(http://iot-face.oss-cn-shanghai.aliyuncs.com/iot-face-yq.png) no-repeat;
+        background-color: #202124;
+    }
+
+    .face-msg {
+        display: inline;
+        font-size: 32px;
+        color: #5FFFF8;
+        padding: 30px 160px 0px 60px;
+    }
+    </style>
+</head>
+
+<body>
+    <div style="padding: 190px 10px 0px 360px;">
+        <div class="face-msg" id='glass' style="color: #5FFFF8"></div>
+        <div class="face-msg" id='gender' style="color: #FF5FE5"></div>
+        <div class="face-msg" id='age' style="color: #FFDD5F"></div>
+        <div class="face-msg" id='expression' style="color: #FC4D4D"></div>
+    </div>
+    <!-- -->
+    <div style="position: relative;padding: 145px 10px 0px 165px;">
+        <div style="position: absolute;">
+            <canvas id="myCanvas" width="720px" height="480px"></canvas>
+        </div>
+        <img id='imageUrl' src="" width="720px" height="480px" />
+    </div>
+    <script type="text/javascript" src="http://iot-face.oss-cn-shanghai.aliyuncs.com/zepto.min.js"></script>
+    <script src="http://iot-face.oss-cn-shanghai.aliyuncs.com/mqttws31.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+
+        initMqtt();
+    });
+
+    var client;
+
+    function initMqtt() {
+        //模拟设备参数
+        var mqttClientId = Math.random().toString(36).substr(2);
+        client = new Paho.MQTT.Client("public.iot-as-mqtt.cn-shanghai.aliyuncs.com", 443, mqttClientId);
+
+        // set callback handlers
+        var options = {
+            useSSL: false,
+            userName: '替换iotId',
+            password: '替换iot token',
+            keepAliveInterval: 60,
+            onSuccess: onConnect,
+            onFailure: function(e) {
+                console.log(e);
+            }
+        };
+
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageDelivered = onMessageDelivered;
+        client.onMessageArrived = onMessageArrived;
+
+        // connect the client
+        client.connect(options);
+    }
+
+    // called when the client connects
+    function onConnect() {
+        // Once a connection has been made, make a subscription
+        client.subscribe("替换订阅数据更新topic");
+    }
+
+    // called when the client loses its connection
+    function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+            console.error("onConnectionLost:", responseObject);
+        }
+    }
+
+    function onMessageArrived(message) {
+        fillData(JSON.parse(message.payloadString))
+    }
+
+    function onMessageDelivered(message) {
+        console.log("onMessageDelivered: [" + message.destinationName + "] --- " + message.payloadString);
+    }
+
+    function fillData(data) {
+
+        $("#age").html(data.age);
+        $("#expression").html(data.expression);
+        $("#gender").html(data.gender);
+        $("#glass").html(data.glass);
+
+        $("#imageUrl").attr("src", data.imgUrl);
+
+        var rect = data.faceRect.split(","); //"270,22,202,287"
+
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#03A9F4';
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+        ctx.rect(rect[0], rect[1], rect[2], rect[3]);
+        ctx.stroke();
+    };
+    </script>
+</body>
+
+</html>
+```
+
+
+## 7. 拍照指令触发器
+
+```javascript
+/**
+ * package.json 添加依赖："@alicloud/pop-core": "1.5.2"
+ */
+const co = require('co');
+const RPCClient = require('@alicloud/pop-core').RPCClient;
+
+const options = {
+    accessKey: "替换ak",
+    accessKeySecret: "替换ak Secret",
+};
+
+//1.初始化client
+const client = new RPCClient({
+    accessKeyId: options.accessKey,
+    secretAccessKey: options.accessKeySecret,
+    endpoint: 'https://iot.cn-shanghai.aliyuncs.com',
+    apiVersion: '2018-01-20'
+});
+
+const params = {
+    ProductKey: "a1p35XsaOS7",
+    TopicFullName: "相机指令topic",
+    MessageContent: new Buffer('{"action":"takephoto"}').toString('base64'),
+    Qos: "0"
+};
+
+co(function*() {
+    try {
+        //3.发起API调用
+        const response = yield client.request('Pub', params);
+        console.log(JSON.stringify(response));
+    } catch (err) {
+        console.log(err);
+    }
+});
+```
 
 ### IoT物联网技术 公共账号
 
