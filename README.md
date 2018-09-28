@@ -4,7 +4,7 @@
 __基于阿里云的Serverless架构__
 
 
-![image.png | left | 700x491](https://cdn.nlark.com/yuque/0/2018/png/106007/1534494218326-d41942b6-1b97-46a5-9d19-b4137053ef20.png "")
+![](https://cdn.nlark.com/yuque/0/2018/png/106007/1534494218326-d41942b6-1b97-46a5-9d19-b4137053ef20.png)
 
 
 ## 2.阿里云产品
@@ -24,8 +24,8 @@ __人脸识别:__[https://data.aliyun.com/product/face](https://data.aliyun.com/
 
 | 名称 | 图片 | 购买 |
 | --- | --- | --- |
-| 摄像头 | ![camera](https://cdn.nlark.com/yuque/0/2018/png/106007/1535443297032-5e1393f0-6a8c-48f3-bc41-a5c4c20bf695.png "") | 淘宝 |
-| 树莓派 | ![raspberry pi](https://cdn.nlark.com/yuque/0/2018/png/106007/1535443375085-a5ca4389-931f-4967-b08c-4e5c5c6532e6.png "") | 淘宝 |
+| 摄像头 | <img width="150" height="150" src="https://cdn.nlark.com/yuque/0/2018/png/106007/1535443297032-5e1393f0-6a8c-48f3-bc41-a5c4c20bf695.png"/> | 淘宝 |
+| 树莓派 | <img width="150" height="150" src="https://cdn.nlark.com/yuque/0/2018/png/106007/1535443375085-a5ca4389-931f-4967-b08c-4e5c5c6532e6.png"/>| 淘宝 |
 
 ## 4.树莓派设备端开发
 ### 4.1 Enable Camera
@@ -283,16 +283,9 @@ module.exports = {
 ```
 
 
+### IoT物联网技术 公共账号
 
-
-<div data-type="alignment" data-value="center" style="text-align:center">
-  <h4 id="aodflb" data-type="h">
-    <a class="anchor" id="更多iot物联网技术，敬请关注公共账号" href="#aodflb"></a>更多IoT物联网技术，敬请关注公共账号</h4>
-</div>
-
-
-
-![iot-tech-weixin.png | center | 225x224](https://cdn.yuque.com/yuque/0/2018/png/106007/1526534749776-9c13a944-f5bd-4a1a-981c-96cec4eabebd.png "")
+<img width="200" height="200" src="https://cdn.yuque.com/yuque/0/2018/png/106007/1526534749776-9c13a944-f5bd-4a1a-981c-96cec4eabebd.png"/>
 
 
 
