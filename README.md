@@ -24,8 +24,8 @@ __人脸识别:__[https://data.aliyun.com/product/face](https://data.aliyun.com/
 
 | 名称 | 图片 | 购买 |
 | --- | --- | --- |
-| 摄像头 | ![image.png | left | 155x144.9410029498525](https://cdn.nlark.com/yuque/0/2018/png/106007/1535443297032-5e1393f0-6a8c-48f3-bc41-a5c4c20bf695.png "") | 淘宝 |
-| 树莓派 | ![image.png | left | 155x144.82939632545933](https://cdn.nlark.com/yuque/0/2018/png/106007/1535443375085-a5ca4389-931f-4967-b08c-4e5c5c6532e6.png "") | 淘宝 |
+| 摄像头 | ![camera](https://cdn.nlark.com/yuque/0/2018/png/106007/1535443297032-5e1393f0-6a8c-48f3-bc41-a5c4c20bf695.png "") | 淘宝 |
+| 树莓派 | ![raspberry pi](https://cdn.nlark.com/yuque/0/2018/png/106007/1535443375085-a5ca4389-931f-4967-b08c-4e5c5c6532e6.png "") | 淘宝 |
 
 ## 4.树莓派设备端开发
 ### 4.1 Enable Camera
